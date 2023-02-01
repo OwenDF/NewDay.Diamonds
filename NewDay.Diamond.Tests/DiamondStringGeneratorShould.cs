@@ -52,4 +52,15 @@ public class DiamondStringGeneratorShould
     {
         new DiamondStringGenerator().GenerateDiamond('b').Should().Be(Diamonds.BDiamond.ToLower());
     }
+
+    // In this case it's extremely vital that we test this with multiple cases and in no way should this be seen as a
+    // contrived way of demonstrating that I know about multi-case tests.
+    [Theory]
+    [InlineData('★')]
+    [InlineData('_')]
+    public void ReturnADiamondWithCustomPadding(char customPaddingCharacter)
+    {
+        new DiamondStringGenerator().GenerateDiamond('E', customPaddingCharacter)
+            .Should().Be(Diamonds.EDiamond.Replace(' ', customPaddingCharacter));
+    }
 }

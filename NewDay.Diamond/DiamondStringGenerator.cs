@@ -5,7 +5,7 @@ public class DiamondStringGenerator
     private static readonly string UpperAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static readonly string LowerAlphabet = UpperAlphabet.ToLower();
     
-    public string GenerateDiamond(char maxCharacter)
+    public string GenerateDiamond(char maxCharacter, char padCharacter = ' ')
     {
         if (!char.IsAsciiLetter(maxCharacter))
         {
@@ -18,11 +18,10 @@ public class DiamondStringGenerator
         var diamondArray = new char[squareSize][];
         for (var i = 0; i < diamondArray.Length; i++)
         {
-            diamondArray[i] = Enumerable.Repeat(' ', squareSize).ToArray();
+            diamondArray[i] = Enumerable.Repeat(padCharacter, squareSize).ToArray();
         }
 
-        var finisedArray = GeneratePopulatedArray(diamondArray, 0, alphabet);
-        return string.Join('\n', finisedArray.Select(x => new string(x)));
+        return string.Join('\n', GeneratePopulatedArray(diamondArray, 0, alphabet).Select(x => new string(x)));
     }
 
     private char[][] GeneratePopulatedArray(char[][] arr, int rowNumber, string alphabet)
